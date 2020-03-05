@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Proptypes from 'prop-types'
 import { getLeads, deleteLead } from '../../actions/leads'
 
 const Leads = ({ leads, getLeads, deleteLead }) => {
@@ -42,12 +41,6 @@ const Leads = ({ leads, getLeads, deleteLead }) => {
 		</>
 	)
 }
-
-// propTypes = {
-// 	leads: Proptypes.array.isRequired,
-// 	getLeads: Proptypes.func.isRequired,
-// 	deleteLead: Proptypes.func.isRequired
-// }
 
 const mapStateToProps = state => ({ leads: state.leads.leads })
 

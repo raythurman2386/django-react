@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { addLead } from '../../actions/leads'
 
 const Form = ({ addLead }) => {
@@ -59,9 +58,5 @@ const Form = ({ addLead }) => {
 		</div>
 	)
 }
-
-// propTypes = {
-// 	addLead: PropTypes.func.isRequired
-// }
 
 export default connect(null, { addLead })(Form)
