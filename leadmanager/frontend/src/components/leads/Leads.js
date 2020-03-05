@@ -1,30 +1,54 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import Proptypes from 'prop-types'
+import { getLeads, deleteLead } from '../../actions/leads'
 
-const Leads = () => {
-	const [leads, setLeads] = React.useState([])
-
+const Leads = ({ leads, getLeads, deleteLead }) => {
 	React.useEffect(() => {
-		fetch('http://localhost:8000/api/leads')
-			.then(res => {
-				return res.json()
-			})
-			.then(data => {
-				setLeads(data)
-			})
-			.catch(err => {
-				console.log(err)
-			})
+		getLeads()
 	}, [])
 
 	return (
-		<ul>
-			{leads.map(lead => (
-				<li>
-					{lead.name} - {lead.email}
-				</li>
-			))}
-		</ul>
+		<>
+			<table className='table table-striped'>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>NAME</th>
+						<th>EMAIL</th>
+						<th>EMAIL</th>
+						<th />
+					</tr>
+				</thead>
+				<tbody>
+					{leads.map(lead => (
+						<tr key={lead.id}>
+							<td>{lead.id}</td>
+							<td>{lead.name}</td>
+							<td>{lead.email}</td>
+							<td>{lead.message}</td>
+							<td>
+								<button
+									onClick={() => deleteLead(lead.id)}
+									className='btn btn-danger btn-sm'
+								>
+									Delete
+								</button>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</>
 	)
 }
 
-export default Leads
+// propTypes = {
+// 	leads: Proptypes.array.isRequired,
+// 	getLeads: Proptypes.func.isRequired,
+// 	deleteLead: Proptypes.func.isRequired
+// }
+
+const mapStateToProps = state => ({ leads: state.leads.leads })
+
+export default connect(mapStateToProps, { getLeads, deleteLead })(Leads)
