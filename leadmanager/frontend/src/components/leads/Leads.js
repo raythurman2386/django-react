@@ -15,7 +15,7 @@ const Leads = ({ leads, getLeads, deleteLead }) => {
 						<th>ID</th>
 						<th>NAME</th>
 						<th>EMAIL</th>
-						<th>EMAIL</th>
+						<th>MESSAGE</th>
 						<th />
 					</tr>
 				</thead>
