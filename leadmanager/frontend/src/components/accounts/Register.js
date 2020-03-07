@@ -9,6 +9,15 @@ const Register = ({ isAuthenticated, registerUser }) => {
 	const [password, setPassword] = React.useState('')
 	const [password2, setPassword2] = React.useState('')
 
+	const validatePassword = e => {
+		e.preventDefault()
+		if (password !== '' && password === password2) {
+			handleSubmit(e)
+		} else {
+			console.log('error')
+		}
+	}
+
 	const handleSubmit = e => {
 		e.preventDefault()
 		let user = { username, email, password }
@@ -23,7 +32,7 @@ const Register = ({ isAuthenticated, registerUser }) => {
 		<div className='col-md-6 m-auto'>
 			<div className='card card-body mt-5'>
 				<h2 className='text-center'>Register</h2>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={validatePassword}>
 					<div className='form-group'>
 						<label>Username</label>
 						<input
