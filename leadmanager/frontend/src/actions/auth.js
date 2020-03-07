@@ -4,6 +4,8 @@ import {
 	USER_LOADED,
 	USER_LOADING,
 	AUTH_ERROR,
+	REGISTER_SUCCESS,
+	REGISTER_ERROR,
 	LOGIN_SUCCESS,
 	LOGIN_ERROR,
 	LOGOUT_SUCCESS,
@@ -25,6 +27,31 @@ export const loadUser = () => (dispatch, getState) => {
 			dispatch(returnErrors(err.response.data, err.response.status))
 			dispatch({
 				type: AUTH_ERROR
+			})
+		})
+}
+
+export const registerUser = user => dispatch => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}
+
+	const body = JSON.stringify(user)
+
+	axios
+		.post('http://localhost:8000/api/auth/register', body, config)
+		.then(res => {
+			dispatch({
+				type: REGISTER_SUCCESS,
+				payload: res.data
+			})
+		})
+		.catch(err => {
+			dispatch(returnErrors(err.response.data, err.response.status))
+			dispatch({
+				type: REGISTER_ERROR
 			})
 		})
 }

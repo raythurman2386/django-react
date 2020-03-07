@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'redux'
+import { Link, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { registerUser } from '../../actions/auth'
 
-const Register = () => {
+const Register = ({ isAuthenticated, registerUser }) => {
 	const [username, setUsername] = React.useState('')
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
@@ -10,6 +11,12 @@ const Register = () => {
 
 	const handleSubmit = e => {
 		e.preventDefault()
+		let user = { username, email, password }
+		registerUser(user)
+	}
+
+	if (isAuthenticated) {
+		return <Redirect to='/' />
 	}
 
 	return (
@@ -71,4 +78,8 @@ const Register = () => {
 	)
 }
 
-export default Register
+const mapStateToProps = state => ({
+	isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { registerUser })(Register)
