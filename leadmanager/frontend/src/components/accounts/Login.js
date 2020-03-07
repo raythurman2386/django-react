@@ -1,12 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { loginUser } from '../../actions/auth'
 
-const Login = () => {
+const Login = ({ isAuthenticated, loginUser }) => {
 	const [username, setUsername] = React.useState('')
 	const [password, setPassword] = React.useState('')
 
 	const handleSubmit = e => {
 		e.preventDefault()
+		loginUser(username, password)
+	}
+
+	if (isAuthenticated) {
+		return <Redirect to='/' />
 	}
 
 	return (
@@ -48,4 +55,8 @@ const Login = () => {
 	)
 }
 
-export default Login
+const mapStateToProps = state => ({
+	isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { loginUser })(Login)
