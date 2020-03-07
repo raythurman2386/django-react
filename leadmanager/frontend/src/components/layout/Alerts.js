@@ -17,6 +17,10 @@ class Alerts extends Component {
 			if (error.msg.msg) {
 				alert.error(`Email: ${error.msg.msg.join()}`)
 			}
+
+			if (error.msg.non_field_errors) {
+				alert.error(`${error.msg.non_field_errors.join()}`)
+			}
 		}
 
 		if (message !== prevProps.message) {
