@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Register = () => {
 	const [username, setUsername] = React.useState('')
@@ -6,7 +7,7 @@ const Register = () => {
 	const [password, setPassword] = React.useState('')
 	const [password2, setPassword2] = React.useState('')
 
-	const handleSubmit = () => {
+	const handleSubmit = e => {
 		e.preventDefault()
 	}
 

@@ -6,6 +6,7 @@ import { Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import Alerts from './layout/Alerts'
 import Register from './accounts/Register'
+import Login from './accounts/Login'
 
 const alertOptions = {
 	timeout: 3000,
@@ -21,7 +22,8 @@ const App = () => {
 				<div className='container'>
 					<Switch>
 						<Route exact path='/' component={Dashboard} />
-						<Route exact path='/register' component={Register} />
+						<Route path='/register' component={Register} />
+						<Route path='/login' component={Login} />
 					</Switch>
 				</div>
 			</AlertProvider>
