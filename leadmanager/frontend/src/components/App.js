@@ -8,6 +8,9 @@ import PrivateRoute from './utils/PrivateRoute'
 import { Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import Alerts from './layout/Alerts'
+import { loadUser } from '../actions/auth'
+import { Provider } from 'react-redux'
+import store from '../store'
 
 const alertOptions = {
 	timeout: 3000,
@@ -15,19 +18,25 @@ const alertOptions = {
 }
 
 const App = () => {
+	React.useEffect(() => {
+		store.dispatch(loadUser())
+	}, [])
+
 	return (
 		<>
-			<AlertProvider template={AlertTemplate} {...alertOptions}>
-				<Header />
-				<Alerts />
-				<div className='container'>
-					<Switch>
-						<PrivateRoute exact path='/' component={Dashboard} />
-						<Route path='/register' component={Register} />
-						<Route path='/login' component={Login} />
-					</Switch>
-				</div>
-			</AlertProvider>
+			<Provider store={store}>
+				<AlertProvider template={AlertTemplate} {...alertOptions}>
+					<Header />
+					<Alerts />
+					<div className='container'>
+						<Switch>
+							<PrivateRoute exact path='/' component={Dashboard} />
+							<Route path='/register' component={Register} />
+							<Route path='/login' component={Login} />
+						</Switch>
+					</div>
+				</AlertProvider>
+			</Provider>
 		</>
 	)
 }
