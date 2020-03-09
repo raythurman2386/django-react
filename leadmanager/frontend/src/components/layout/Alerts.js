@@ -10,12 +10,16 @@ class Alerts extends Component {
 				alert.error(`Name: ${error.msg.name.join()}`)
 			}
 
+			if (error.msg.username) {
+				alert.error(`Username: ${error.msg.username.join()}`)
+			}
+
 			if (error.msg.email) {
 				alert.error(`Email: ${error.msg.email.join()}`)
 			}
 
 			if (error.msg.msg) {
-				alert.error(`Email: ${error.msg.msg.join()}`)
+				alert.error(error.msg.msg.join())
 			}
 
 			if (error.msg.non_field_errors) {
@@ -30,6 +34,10 @@ class Alerts extends Component {
 
 			if (message.leadAdded) {
 				alert.success(message.leadAdded)
+			}
+
+			if(message.passwordNotMatch) {
+				alert.error(message.passwordNotMatch)
 			}
 		}
 	}

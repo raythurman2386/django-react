@@ -2,8 +2,9 @@ import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { registerUser } from '../../actions/auth'
+import { createMessage } from "../../actions/messages";
 
-const Register = ({ isAuthenticated, registerUser }) => {
+const Register = ({ isAuthenticated, registerUser, createMessage }) => {
 	const [username, setUsername] = React.useState('')
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
@@ -14,7 +15,7 @@ const Register = ({ isAuthenticated, registerUser }) => {
 		if (password !== '' && password === password2) {
 			handleSubmit(e)
 		} else {
-			console.log('error')
+			createMessage({ passwordNotMatch: 'Passwords do not match'})
 		}
 	}
 
@@ -91,4 +92,4 @@ const mapStateToProps = state => ({
 	isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, { registerUser })(Register)
+export default connect(mapStateToProps, { registerUser, createMessage })(Register)
